@@ -10,6 +10,10 @@ body {
     background: #fff;
 }
 
+button:hover {
+    opacity: 0.5;
+}
+
 .app {
     max-width: 420px;
     margin: 0 auto;
@@ -71,6 +75,8 @@ body {
 .stat {
     margin-bottom: 6px;
     font-size: 15px;
+    display: flex;
+    align-items: baseline;
 }
 
 .edit {
@@ -166,6 +172,11 @@ body {
 .modal__input {
   flex: 1;
   min-width: 100px;
+}
+
+/*рубли*/
+.rub::after {
+    content: " руб.";
 }
 
 /* === DESKTOP (от 768px) === */

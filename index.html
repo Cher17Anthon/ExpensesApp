@@ -13,15 +13,15 @@
 
         <!-- Ввод -->
         <div class="expense-form">
-            <div class="expense-input">
-                <input class="js-input" type="number" placeholder="Введите сумму">
-                <span class="currency">руб.</span>
+            <div class="expense-input rub">
+                <input class="js-input" type="number" min="1" placeholder="Введите сумму">
             </div>
             <button class="js-button btn-primary">Добавить</button>
         </div>
 
         <!-- Категория -->
         <select class="js-category category">
+            <option hidden disabled selected>Категория</option>
             <option>Кафе и рестораны</option>
             <option>Транспорт</option>
             <option>Аптека</option>
@@ -31,20 +31,18 @@
         <!-- Информация -->
         <div class="stats">
             <div class="stat">
-                <span>Лимит:</span>
-                <span class="js-limit"></span>
-                <span>руб.</span>
+                <h2>Лимит:</h2>
+                <span class="js-limit rub"></span>
                 <button class="js-popup-changes edit">✎</button>
             </div>
 
             <div class="stat">
-                <span>Всего:</span>
-                <span class="js-sum"></span>
-                <span>руб.</span>
+                <h2>Всего:</h2>
+                <span class="js-sum rub"></span>
             </div>
 
             <div class="stat">
-                <span>Статус:</span>
+                <h2>Статус:</h2>
                 <span class="js-status status"></span>
             </div>
         </div>
@@ -70,9 +68,8 @@
 
             <div class="modal__content">
                 <div class="modal__row">
-                    <div class="expense-input modal__input">
-                    <input class="js-limit-input" type="number" placeholder="Введите сумму">
-                    <span class="currency">руб.</span>
+                    <div class="expense-input modal__input rub">
+                    <input class="js-limit-input" type="number" min="1" placeholder="Введите сумму">
                     </div>
 
                     <button class="btn-primary js-limit-save" type="button">Задать лимит</button>

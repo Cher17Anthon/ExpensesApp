@@ -25,6 +25,28 @@ const limitNodeModalBtn =document.querySelector('.js-limit-save');
 
 const expenses = [];
 
+//сохранение в localStorage
+loadFromStorage();
+
+function saveToStorage() {
+    localStorage.setItem('expenses', JSON.stringify(expenses));
+    localStorage.setItem('limit', String(LIMIT));
+}
+
+function loadFromStorage() {
+    const savedExpenses = localStorage.getItem('expenses');
+    const savedLimit = localStorage.getItem('limit');
+
+    if (savedExpenses) {
+        expenses.push(...JSON.parse(savedExpenses));
+    }
+
+    if (savedLimit) {
+        LIMIT = Number(savedLimit);
+    }
+}
+
+
 
 buttonNode.addEventListener('click', function() {
     const expense = getExpenseFromUser();
@@ -35,21 +57,22 @@ buttonNode.addEventListener('click', function() {
     
     //2. Сохраняем трату в список
     trackExpense(expense); 
-
+    saveToStorage();
     render(expenses);
 })
 
 deleteHistory.addEventListener('click', function() {
     expenses.length = 0;
+    localStorage.removeItem('expenses');
     render(expenses);
 })
 
-init(expenses);
+init();
+render(expenses);
 
-function init(expenses) {
+function init() {
     limitNode.innerText = LIMIT;
     statusNode.innerText = STATUS_IN_LIMIT;
-    sumNode.innerText = calculateExprnses(expenses);
 }
 
 function trackExpense(expense) {
@@ -57,20 +80,30 @@ function trackExpense(expense) {
 }
 
 function getExpenseFromUser() {
-    if (inputNode.value === '') {
-        return null;   
-    }
-    const expense = {
-        sum: Number(inputNode.value),
-        category: spendingCategory.value
-    };
-    clearInput();
+    const value = Number(inputNode.value);
+    const category = spendingCategory.value;
 
+    if (value <= 0 || Number.isNaN(value)) {
+        return null;
+    }
+
+    if (category === 'Категория') {
+        return null;
+    }
+
+    const expense = {
+        sum: value,
+        category: category
+    };
+
+    clearInput();
     return expense;
 }
 
+
 function clearInput() {
     inputNode.value = '';
+    spendingCategory.selectedIndex = 0;
 }
 
 function calculateExprnses(expenses) {
@@ -92,6 +125,10 @@ function render(expenses) {
 }
 
 function renderHistory(expenses) {
+    if (expenses.length === 0) {
+        historyNode.innerHTML = '';
+        return;
+    }
     let expensesListHTML = '';
 
     expenses.forEach((element) => {
@@ -136,9 +173,12 @@ document.addEventListener('keydown', (e) => {
 
 //изменение лимита.
 limitNodeModalBtn.addEventListener('click', () => {
-    LIMIT = Number(limitNodeModal.value);
+    const newLimit = Number(limitNodeModal.value);
+    if (newLimit <= 0 || Number.isNaN(newLimit)) return;
+    LIMIT = newLimit;
+    saveToStorage();
     limitNode.innerText = LIMIT;
     limitNodeModal.value = '';
     render(expenses);
     modalNode.classList.remove('is-open');
-})
+});
