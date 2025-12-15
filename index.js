@@ -138,6 +138,7 @@ document.addEventListener('keydown', (e) => {
 limitNodeModalBtn.addEventListener('click', () => {
     LIMIT = Number(limitNodeModal.value);
     limitNode.innerText = LIMIT;
+    limitNodeModal.value = '';
     render(expenses);
     modalNode.classList.remove('is-open');
 })
