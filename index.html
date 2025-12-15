@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Учёт расходов</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div class="app">
+
+        <h1 class="title">Учёт расходов</h1>
+
+        <!-- Ввод -->
+        <div class="expense-form">
+            <div class="expense-input">
+                <input class="js-input" type="number" placeholder="Введите сумму">
+                <span class="currency">руб.</span>
+            </div>
+            <button class="js-button btn-primary">Добавить</button>
+        </div>
+
+        <!-- Категория -->
+        <select class="js-category category">
+            <option>Кафе и рестораны</option>
+            <option>Транспорт</option>
+            <option>Аптека</option>
+            <option>Развлечения</option>
+        </select>
+
+        <!-- Информация -->
+        <div class="stats">
+            <div class="stat">
+                <span>Лимит:</span>
+                <span class="js-limit"></span>
+                <span>руб.</span>
+                <button class="js-popup-changes edit">✎</button>
+            </div>
+
+            <div class="stat">
+                <span>Всего:</span>
+                <span class="js-sum"></span>
+                <span>руб.</span>
+            </div>
+
+            <div class="stat">
+                <span>Статус:</span>
+                <span class="js-status status"></span>
+            </div>
+        </div>
+
+        <!-- История -->
+        <div class="history">
+            <h2 class="subtitle">История:</h2>
+            <div class="js-history"></div>
+        </div>
+
+        <!-- Сброс -->
+        <button class="js-reset reset">Сбросить расходы</button>
+
+    </div>
+    <!-- Модалка лимита -->
+    <div class="modal js-modal" aria-hidden="true">
+        <div class="modal__backdrop js-modal-close"></div>
+
+        <div class="modal__dialog" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+            <button class="modal__close js-modal-close" type="button" aria-label="Закрыть">×</button>
+
+            <h2 class="modal__title" id="modalTitle">Новый лимит</h2>
+
+            <div class="modal__content">
+                <div class="modal__row">
+                    <div class="expense-input modal__input">
+                    <input class="js-limit-input" type="number" placeholder="Введите сумму">
+                    <span class="currency">руб.</span>
+                    </div>
+
+                    <button class="btn-primary js-limit-save" type="button">Задать лимит</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="index.js"></script>
+</body>
+</html>
